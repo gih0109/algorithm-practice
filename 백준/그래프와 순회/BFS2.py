@@ -29,6 +29,6 @@ while que:
             que.append(i)
             cnt += 1
 
-print(visited)
+# print(visited)
 for i in visited[1: ]:
     print(i)
