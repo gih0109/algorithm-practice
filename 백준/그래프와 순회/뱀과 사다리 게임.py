@@ -1,6 +1,6 @@
 import sys
 from collections import deque
-sys.stdin = open(r"그래프와 순회\test.txt", "r")
+sys.stdin = open(r"백준\그래프와 순회\test.txt", "r")
 input = sys.stdin.readline
 
 n, m = map(int, input().split())
@@ -18,29 +18,20 @@ que = deque()
 que.append(1)
 
 while que:
+    now_p = que.popleft()
 
-    tmp = que.popleft()
-
-    if tmp == 100:
+    if now_p == 100:
         break
 
     for i in range(1, 7):
-        a = tmp + i
-        if 0 < a < 101 and check[a] == -1:
-            if board[a] == 0:
-                check[a] = check[tmp] + 1
-                que.append(a)
-            else:
-                b = a
-                while board[b]:
-                    if check[board[b]] == -1:
-                        check[board[b]] = check[tmp] + 1
-                        b = board[b]
-                        que.append(b)
-                    else:
-                        break
+        next_p = now_p + i
+        
+        if 0 < next_p < 101 and check[next_p] == -1:
+            if board[next_p] != 0:
+                next_p = board[next_p]
 
-                check[a] = check[tmp] + 1
-                que.append(a)
+            if check[next_p] == -1:
+                check[next_p] = check[now_p] + 1
+                que.append(next_p)
 
 print(check[-1])
