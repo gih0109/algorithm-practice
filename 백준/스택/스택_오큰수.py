@@ -1,29 +1,17 @@
 import sys
-from collections import deque
-sys.stdin = open(r"스택\test.txt", "r")
+sys.stdin = open(r"백준\스택\test.txt", "r")
 input = sys.stdin.readline
 
 n = int(input())
-num = list(map(int, input().split()))
-num = deque(num)
-stack = deque()
-stack.append(num.popleft())
+arr = list(map(int, input().split()))
+stack = []
+
 result = [-1] * n
 
-cnt = 0
-while stack:
-    if len(num) == 0 and len(stack) > 1:
-        num = stack
-        stack = deque()
-        stack.append(num.popleft())
-    if len(num) > 0 and len(stack) < 2:
-        stack.append(num.popleft())
-    while num and stack[0] > stack[-1]:
-        stack.append(num.popleft())
-    if stack[0] < stack[-1]:
-        result[cnt] = stack[-1]
-    stack.popleft()
-    cnt += 1
+for idx in range(n):
+    while stack and stack[-1][0] < arr[idx]:
+        tmp_val, tmp_idx = stack.pop()
+        result[tmp_idx] = arr[idx]
+    stack.append((arr[idx], idx))
 
-for i in range(n):
-    print(result[i], end=' ')
+print(*result)
