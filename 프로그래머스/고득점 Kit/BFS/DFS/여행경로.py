@@ -31,7 +31,6 @@ def solution(tickets: list) -> list:
         graph[key] = sorted(val)
 
     n = len(tickets)
-    print(graph)
 
     result = ["ICN"]
     dfs(graph, "ICN", n, result)
