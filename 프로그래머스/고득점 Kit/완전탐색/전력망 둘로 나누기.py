@@ -2,7 +2,7 @@ import sys
 from collections import defaultdict, deque
 
 # 넓이우선탐색
-def bfs(a, b, wire_node):
+def bfs(start, cut, wire_node):
     que = deque()
     que.append(a)
     visited = [0] * (n + 1)
@@ -12,7 +12,7 @@ def bfs(a, b, wire_node):
     while que:
         tmp = que.popleft()
         for next_wire in wire_node[tmp]:
-            if tmp == a and next_wire == b:
+            if tmp == start and next_wire == cut:
                 continue
             if visited[next_wire] == 0:
                 visited[next_wire] = 1
