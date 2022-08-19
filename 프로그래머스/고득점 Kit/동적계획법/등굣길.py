@@ -1,21 +1,20 @@
 def solution(m, n, puddles):
     dy = [[0] * m for _ in range(n)]
-    
     dy[0][0] = 1
 
     for i in range(n):
         for j in range(m):
+            n_x, n_y = 0, 0
+            if i == 0 and j == 0:
+                continue
             if [j+1, i+1] in puddles:
                 continue
-            if i == 0 and j == 0:
-                dy[i][j] = 1
-            elif i == 0:
-                dy[i][j] = dy[i][j-1]
-            elif j == 0:
-                dy[i][j] = dy[i-1][j]
-            else:
-                dy[i][j] = (dy[i-1][j] + dy[i][j-1]) % 1000000007
-
+            if i - 1 >= 0:
+                n_x = dy[i-1][j]
+            if j - 1 >= 0:
+                n_y = dy[i][j-1]
+            dy[i][j] = (n_x + n_y) % 1000000007
+    
     return dy[-1][-1]
 
 if __name__ == "__main__":
